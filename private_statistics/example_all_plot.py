@@ -6,11 +6,14 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 
-from algorithms import (GoogleQuantiles, LaplaceAdaptiveQuantiles,
-                        LaplaceHistogramQuantiles, LaplaceQuantiles)
-from distributions import GoodreadsPages, GoodreadsRatings, Normal, Uniform
-from metrics import Distortion, QuantilesMissedPoints
-from runner import test, test_multiple
+from private_statistics.algorithms import (GoogleQuantiles,
+                                           LaplaceAdaptiveQuantiles,
+                                           LaplaceHistogramQuantiles,
+                                           LaplaceQuantiles)
+from private_statistics.distributions import (GoodreadsPages, GoodreadsRatings,
+                                              Normal, Uniform)
+from private_statistics.metrics import Distortion, QuantilesMissedPoints
+from private_statistics.runner import test, test_multiple
 
 NB_QUANTILES = 9
 
@@ -23,7 +26,7 @@ distributions = [
 ]
 metrics = [QuantilesMissedPoints(NB_QUANTILES), Distortion(NB_QUANTILES)]
 
-repo = "google_quantiles"
+repo = "algorithms/google_quantiles"
 algorithms = [
     LaplaceQuantiles(NB_QUANTILES),
     GoogleQuantiles(repo, NB_QUANTILES),
@@ -49,8 +52,10 @@ for row1, metric in zip(results, metrics):
                 df.loc[len(df)] = [distribution.name, algorithm.name, metric.name, x]
 
 print(df)
-plot = sns.scatterplot(
-    x="Distribution", y="Value", hue="Algorithm", style="Metric", data=df
-)
-plot.set(yscale="log")
+sns.set_theme(style="whitegrid")
+g = sns.FacetGrid(df, col="Metric", sharey=False)
+g.map_dataframe(sns.lineplot, x="Distribution", y="Value", hue="Algorithm").set(yscale='log')
+g.add_legend()
+g.set_xticklabels(rotation=30)
+plt.subplots_adjust(bottom=0.3)
 plt.show()

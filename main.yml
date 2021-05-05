@@ -1,0 +1,17 @@
+stages:
+  - build
+  - benchmark
+
+image: "python:3.7"
+
+job-build-package:
+  stage: build
+  script:
+    - pip install setuptools wheel
+    - python setup.py sdist bdist_wheel
+    - g++ private_statistics/algorithms/google_quantiles/google_quantile.cc -std=c++14 -O3 -o private_statistics/algorithms/google_quantiles/google_quantile
+
+job-benchmark:
+  stage: benchmark
+  script:
+    - python private_statistics/benchmark.py
