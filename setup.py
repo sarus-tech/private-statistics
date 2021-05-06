@@ -21,7 +21,7 @@ setuptools.setup(
     install_requires=[
         'numpy~=1.18',
         'pandas',
-        'matplotlib'
+        'matplotlib',
         'seaborn'
     ],
     python_requires='>=3.7',
