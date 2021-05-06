@@ -17,7 +17,7 @@ from private_statistics.runner import test, test_multiple
 
 NB_QUANTILES = 9
 
-goodreads_csv = "books2.csv"
+goodreads_csv = "private_statistics/books2.csv"
 distributions = [
     Uniform(),
     Normal(),
