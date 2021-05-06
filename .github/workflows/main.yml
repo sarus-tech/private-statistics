@@ -27,6 +27,7 @@ jobs:
           pip install setuptools wheel
           python setup.py sdist bdist_wheel
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install .
           g++ private_statistics/algorithms/google_quantiles/google_quantile.cc -std=c++14 -O3 -o private_statistics/algorithms/google_quantiles/google_quantile
 
       - name: benchmark
