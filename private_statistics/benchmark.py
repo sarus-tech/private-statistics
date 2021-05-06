@@ -26,7 +26,7 @@ distributions = [
 ]
 metrics = [QuantilesMissedPoints(NB_QUANTILES), Distortion(NB_QUANTILES)]
 
-repo = "algorithms/google_quantiles"
+repo = "private_statistics/algorithms/google_quantiles"
 algorithms = [
     LaplaceQuantiles(NB_QUANTILES),
     GoogleQuantiles(repo, NB_QUANTILES),
