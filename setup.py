@@ -18,5 +18,11 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
+    install_requires=[
+        'numpy~=1.18',
+        'pandas',
+        'matplotlib'
+        'seaborn'
+    ],
     python_requires='>=3.7',
 )
